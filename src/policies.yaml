@@ -1,14 +1,10 @@
 ---
-enabled: true
-inbound:
-- expressions: 
-  name: Add JWT authentication and rate limiting
-  actions:
-  - type: rate-limit
+actions:
+  - type: "rate-limit"
     config:
-      name: Only allow 30 requests per minute
-      algorithm: sliding_window
-      capacity: 3
-      rate: 60s
+      name: "Only allow 30 requests per minute"
+      algorithm: "sliding_window"
+      capacity: 30
+      rate: "60s"
       bucket_key:
-      - req.Headers['\''x-api-key'\'']
+        - "conn.client_ip"
